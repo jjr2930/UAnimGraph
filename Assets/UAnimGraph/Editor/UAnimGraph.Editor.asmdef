@@ -1,0 +1,18 @@
+{
+    "name": "UAnimGraph.Editor",
+    "rootNamespace": "UAnimGraph.Editor",
+    "references": [
+        "GUID:f598b686a1dda1d42a0e983d06b16fea"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

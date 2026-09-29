@@ -1,19 +1,33 @@
+using System;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
 
 namespace UAnimGraph.Runtime
 {
-    public class AnimationSequence : MonoBehaviour
+    [CreateAssetMenu(fileName = "New Animation Sequence", menuName = "UAnimGraph/Animation Sequence", order = 1)]
+    [Serializable]
+    public class AnimationSequence : ScriptableObject
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField] float duration;
+        [SerializeField] float playbackSpeed;
+        [SerializeField] AnimationClip animationClip;
+        [SerializeReference] AnimationNotifyBase[] notifies;
+        [SerializeField] AnimationCurve curve;
+        [SerializeField] float startTime;
+        [SerializeField] bool loop;
+
+        AnimationClipPlayable clipPlayable;
+
+        public AnimationClip GetClip()
         {
-        
+            return animationClip;
         }
 
-        // Update is called once per frame
-        void Update()
+        public AnimationClipPlayable GetClipPlayable(PlayableGraph playableGraph)
         {
-        
+            clipPlayable = AnimationClipPlayable.Create(playableGraph, animationClip);
+            return clipPlayable;
         }
     }
 }

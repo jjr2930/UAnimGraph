@@ -4,16 +4,36 @@ namespace UAnimGraph.Runtime
 {
     public class UAnimGraphComponent : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField] UAnimGraphAsset graphAsset;
+        [SerializeField] Animator animator;
+        [SerializeField] bool autoPlay = false;
+
+        public UAnimGraphAsset GraphAsset => graphAsset;
+
+        public void Reset()
         {
-        
+            animator = GetComponent<Animator>();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Awake()
         {
-        
+            graphAsset.BuildPlayableGraph(animator);
+        }
+
+        public void Start()
+        {
+            if (autoPlay)
+            {
+                graphAsset.Play();
+            }
+        }
+
+        public void Update()
+        {
+            if (!autoPlay)
+            {
+                graphAsset.UpdateGraph(Time.deltaTime);
+            }
         }
     }
 }

@@ -1,19 +1,17 @@
+using System;
 using UnityEngine;
-
+using UnityEngine.Animations;
 namespace UAnimGraph.Runtime
 {
-    public class Mixer2D : MonoBehaviour
+    [Serializable]
+    public class Mixer2D : Element
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField] AnimationSequence sequence1;
+        [SerializeField] AnimationSequence sequence2;
+        public void BuildMixer2D()
         {
-        
-        }
+            AnimationMixerPlayable mixerPlayable = AnimationMixerPlayable.Create(component.GetComponent<Animator>().playableGraph, 2);
 
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }

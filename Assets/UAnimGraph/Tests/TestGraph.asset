@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907fc0dcfa2eb5247a4f26ba2e898618, type: 3}
+  m_Name: TestGraph
+  m_EditorClassIdentifier: UAnimGraph.Runtime::UAnimGraph.Runtime.UAnimGraphAsset
+  mixer1D:
+    id: 
+    displayName: 
+    blackboard: {fileID: 0}
+    owner: {fileID: 0}
+    component: {fileID: 0}
+    sequence1: {fileID: 11400000, guid: 01d49d723c348864688c9dc7992ab302, type: 2}
+    sequence2: {fileID: 11400000, guid: f865d7b7786d531429225872b24af0db, type: 2}
+    alpha: 0.424
+  autoPlay: 1

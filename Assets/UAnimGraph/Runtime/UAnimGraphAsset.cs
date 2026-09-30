@@ -26,8 +26,6 @@ namespace UAnimGraph.Runtime
             mixerPlayable = mixer1D.BuildMixer1D(playableGraph);
 
             playableOutput.SetSourcePlayable(mixerPlayable);
-
-            targetAnimator = animator;
         }
 
         public void Play()

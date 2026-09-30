@@ -8,21 +8,34 @@ namespace UAnimGraph.Runtime
     [Serializable]
     public class Mixer1D : Element
     {
-        [SerializeField] AnimationSequence sequence1;
-        [SerializeField] AnimationSequence sequence2;
+        [Serializable]
+        public class Mixer1DElement
+        {
+            [SerializeField] AnimationSequence sequence;
+            [SerializeField] float peekPoint;
+
+            public float Evaluate(float alpha)
+            {
+
+            }
+        }
+
+        [SerializeField] AnimationSequence[] sequences;
         [Range(0f, 1f)]
         [SerializeField] float alpha;
+        [SerializeField] AnimationCurve curve;
+
         AnimationMixerPlayable mixerPlayable;
         public AnimationMixerPlayable BuildMixer1D(PlayableGraph graph)
         {
-            mixerPlayable = AnimationMixerPlayable.Create(graph, 2);
+            mixerPlayable = AnimationMixerPlayable.Create(graph, sequences.Length);
 
             // Create two AnimationClipPlayable playables, then connect them to the mixer.
-            var clipPlayable0 = AnimationClipPlayable.Create(graph, sequence1.GetClip());
-            var clipPlayable1 = AnimationClipPlayable.Create(graph, sequence2.GetClip());
-
-            graph.Connect(clipPlayable0, 0, mixerPlayable, 0);
-            graph.Connect(clipPlayable1, 0, mixerPlayable, 1);
+            for (int i = 0; i < sequences.Length; i++)
+            {
+                var clipPlayable = AnimationClipPlayable.Create(graph, sequences[i].GetClip());
+                graph.Connect(clipPlayable, 0, mixerPlayable, i);
+            }
 
             return mixerPlayable;
         }
@@ -31,9 +44,6 @@ namespace UAnimGraph.Runtime
         {
             if (!mixerPlayable.IsValid())
                 return;
-
-            mixerPlayable.SetInputWeight(0, 1f - alpha);
-            mixerPlayable.SetInputWeight(1, alpha);
         }
     }
 }

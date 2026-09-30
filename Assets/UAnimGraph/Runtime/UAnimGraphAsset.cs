@@ -8,7 +8,8 @@ namespace UAnimGraph.Runtime
     public class UAnimGraphAsset : ScriptableObject
     {
         [SerializeField] Mixer1D mixer1D;
-        [SerializeField] bool autoPlay = false;
+        [Range(0f, 2f)]
+        [SerializeField] float testWeight = 0f;
         Animator targetAnimator;
         PlayableGraph playableGraph;
         AnimationMixerPlayable mixerPlayable;
@@ -41,9 +42,9 @@ namespace UAnimGraph.Runtime
             if (!playableGraph.IsValid())
                 return;
 
-            playableGraph.Evaluate(deltaTime);
-
-            mixer1D.Update(Time.deltaTime);
+            mixer1D.SetWeight(testWeight);
+            //playableGraph.Evaluate(deltaTime);
+            //mixer1D.Update(deltaTime);
         }
 
         public void OnDestroy()

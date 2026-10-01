@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b50a979e56d71340ae383a52b20928f, type: 3}
-  m_Name: SprintSequence
+  m_Name: Sprint
   m_EditorClassIdentifier: UAnimGraph.Runtime::UAnimGraph.Runtime.AnimationSequence
   duration: 0
   playbackSpeed: 0

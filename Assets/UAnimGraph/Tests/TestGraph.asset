@@ -12,13 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907fc0dcfa2eb5247a4f26ba2e898618, type: 3}
   m_Name: TestGraph
   m_EditorClassIdentifier: UAnimGraph.Runtime::UAnimGraph.Runtime.UAnimGraphAsset
-  mixer1D:
+  mixer2D:
     id: 
     displayName: 
     blackboard: {fileID: 0}
     owner: {fileID: 0}
     component: {fileID: 0}
-    sequence1: {fileID: 11400000, guid: 01d49d723c348864688c9dc7992ab302, type: 2}
-    sequence2: {fileID: 11400000, guid: f865d7b7786d531429225872b24af0db, type: 2}
-    alpha: 0.424
-  autoPlay: 1
+    inputs:
+    - sequence: {fileID: 11400000, guid: 210fe121d9b436145aeeea6e771ac368, type: 2}
+      threshold: {x: 0, y: 1}
+    - sequence: {fileID: 11400000, guid: 22302a70817239c4f8c682d48fbc017b, type: 2}
+      threshold: {x: 0, y: -1}
+    - sequence: {fileID: 11400000, guid: 344092133700c2f4fa02781b36520dcb, type: 2}
+      threshold: {x: -1, y: 0}
+    - sequence: {fileID: 11400000, guid: 2c1fe888e6845ae43b353830cc005118, type: 2}
+      threshold: {x: 1, y: 0}
+    horizontalMinMax:
+      min: -1
+      max: 1
+    verticalMinMax:
+      min: -1
+      max: 1
+  testValue: {x: 0, y: 1}

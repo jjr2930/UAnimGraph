@@ -7,9 +7,9 @@ namespace UAnimGraph.Runtime
     [CreateAssetMenu(fileName = "New UAnimGraph Asset", menuName = "UAnimGraph/Asset", order = 0)]
     public class UAnimGraphAsset : ScriptableObject
     {
-        [SerializeField] Mixer1D mixer1D;
-        [Range(0f, 2f)]
-        [SerializeField] float testWeight = 0f;
+        [SerializeField] Mixer2D mixer2D;
+
+        [SerializeField] Vector2 testValue = Vector2.zero;
         Animator targetAnimator;
         PlayableGraph playableGraph;
         AnimationMixerPlayable mixerPlayable;
@@ -24,7 +24,7 @@ namespace UAnimGraph.Runtime
 
             var playableOutput = AnimationPlayableOutput.Create(playableGraph, "Animation", animator);
 
-            mixerPlayable = mixer1D.BuildMixer1D(playableGraph);
+            mixerPlayable = mixer2D.BuildMixer2D(playableGraph);
 
             playableOutput.SetSourcePlayable(mixerPlayable);
         }
@@ -42,7 +42,7 @@ namespace UAnimGraph.Runtime
             if (!playableGraph.IsValid())
                 return;
 
-            mixer1D.SetWeight(testWeight);
+            mixer2D.SetWeights(testValue);
             //playableGraph.Evaluate(deltaTime);
             //mixer1D.Update(deltaTime);
         }

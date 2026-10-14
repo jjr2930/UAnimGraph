@@ -6,7 +6,7 @@ namespace UAnimGraph.Runtime
     {
         [SerializeField] UAnimGraphAsset graphAsset;
         [SerializeField] Animator animator;
-
+        [SerializeField] float selfTimeScale = 1f;
         public UAnimGraphAsset GraphAsset => graphAsset;
 
         public void Reset()
@@ -26,7 +26,7 @@ namespace UAnimGraph.Runtime
 
         public void Update()
         {
-            graphAsset.UpdateGraph(Time.deltaTime);
+            graphAsset.EvaluateGraph(Time.deltaTime * selfTimeScale);
         }
     }
 }

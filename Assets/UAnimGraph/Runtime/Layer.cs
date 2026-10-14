@@ -8,6 +8,6 @@ namespace UAnimGraph.Runtime
     public class Layer : Element
     {
         [SerializeField] List<StateMachine> stateMachines = new List<StateMachine>();
-        [SerializeReference] List<Mixerbase> mixers = new List<Mixerbase>();
+        //[SerializeReference] List<MixerBase> mixers = new List<MixerBase>();
     }
 }

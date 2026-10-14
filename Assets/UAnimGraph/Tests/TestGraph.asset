@@ -19,18 +19,84 @@ MonoBehaviour:
     owner: {fileID: 0}
     component: {fileID: 0}
     inputs:
-    - sequence: {fileID: 11400000, guid: 210fe121d9b436145aeeea6e771ac368, type: 2}
+    - sequence:
+        duration: 0
+        playbackSpeed: 0
+        animationClip: {fileID: -203655887218126122, guid: 7da771dd5bc0e484286430eb8647fdfa, type: 3}
+        notifies: []
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        startTime: 0
+        loop: 0
       threshold: {x: 0, y: 1}
-    - sequence: {fileID: 11400000, guid: 22302a70817239c4f8c682d48fbc017b, type: 2}
+    - sequence:
+        duration: 0
+        playbackSpeed: 0
+        animationClip: {fileID: -203655887218126122, guid: 550af3a5822da5848be05b8ba90056b7, type: 3}
+        notifies: []
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        startTime: 0
+        loop: 0
       threshold: {x: 0, y: -1}
-    - sequence: {fileID: 11400000, guid: 344092133700c2f4fa02781b36520dcb, type: 2}
+    - sequence:
+        duration: 0
+        playbackSpeed: 0
+        animationClip: {fileID: -203655887218126122, guid: 38aef567ab842c741a041da67f0710bf, type: 3}
+        notifies: []
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        startTime: 0
+        loop: 0
       threshold: {x: -1, y: 0}
-    - sequence: {fileID: 11400000, guid: 2c1fe888e6845ae43b353830cc005118, type: 2}
+    - sequence:
+        duration: 0
+        playbackSpeed: 0
+        animationClip: {fileID: -203655887218126122, guid: dc51224a6e60ae44580be57dafeeeb10, type: 3}
+        notifies: []
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        startTime: 0
+        loop: 0
       threshold: {x: 1, y: 0}
+    - sequence:
+        duration: 0
+        playbackSpeed: 0
+        animationClip: {fileID: -203655887218126122, guid: 33c7ed16845c6954eaf4a5bcee8b2504, type: 3}
+        notifies: []
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        startTime: 0
+        loop: 0
+      threshold: {x: 0, y: 0}
     horizontalMinMax:
       min: -1
       max: 1
     verticalMinMax:
       min: -1
       max: 1
-  testValue: {x: 0, y: 1}
+  testX: 0
+  testY: 1
+  references:
+    version: 2
+    RefIds: []

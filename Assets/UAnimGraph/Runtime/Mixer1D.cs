@@ -8,6 +8,7 @@ using UnityEngine.Playables;
 namespace UAnimGraph.Runtime
 {
     /// <summary>
+    /// TODO: Inherit from MixerBase
     /// in normalize space, 0~1, 0 is first sequence's threshold, 1 is last sequence's threshold
     /// </summary>
     [Serializable]
@@ -16,10 +17,10 @@ namespace UAnimGraph.Runtime
         [Serializable]
         public class Mixer1DElement
         {
-            [SerializeField] AnimationSequence sequence;
+            [SerializeField] ClipPlayer sequence;
             [SerializeField] float threshold;
 
-            public AnimationSequence Sequence => sequence;
+            public ClipPlayer Sequence => sequence;
             public float Threshold => threshold;
         }
 
@@ -27,6 +28,7 @@ namespace UAnimGraph.Runtime
         [SerializeField] float min;
         [SerializeField] float max;
         [SerializeField] float weight;
+        [SerializeField] float localTimeScale = 1f;
 
         AnimationClipPlayable[] clipPlayables;
 
@@ -41,7 +43,7 @@ namespace UAnimGraph.Runtime
             // Create two AnimationClipPlayable playables, then connect them to the mixer.
             for (int i = 0; i < inputs.Length; i++)
             {
-                clipPlayables[i] = inputs[i].Sequence.GetClipPlayable(graph);
+                clipPlayables[i] = inputs[i].Sequence.BuildClipPlayable(graph);
                 graph.Connect(clipPlayables[i], 0, mixerPlayable, i);
             }
 
@@ -82,14 +84,14 @@ namespace UAnimGraph.Runtime
                 }
             }
         }
-        public void Update(float deltaTime)
+
+        public void EvaluateGraph(float time)
         {
             if (!mixerPlayable.IsValid())
                 return;
-
             for (int i = 0; i < clipPlayables.Length; i++)
             {
-                clipPlayables[i].SetTime(clipPlayables[i].GetTime() + deltaTime);
+                clipPlayables[i].SetTime(time * localTimeScale);
             }
         }
     }

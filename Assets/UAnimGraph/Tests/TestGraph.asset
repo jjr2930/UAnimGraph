@@ -19,74 +19,24 @@ MonoBehaviour:
     owner: {fileID: 0}
     component: {fileID: 0}
     inputs:
-    - sequence:
-        duration: 0
-        playbackSpeed: 0
+    - clipPlayer:
         animationClip: {fileID: -203655887218126122, guid: 7da771dd5bc0e484286430eb8647fdfa, type: 3}
-        notifies: []
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        startTime: 0
         loop: 0
       threshold: {x: 0, y: 1}
-    - sequence:
-        duration: 0
-        playbackSpeed: 0
+    - clipPlayer:
         animationClip: {fileID: -203655887218126122, guid: 550af3a5822da5848be05b8ba90056b7, type: 3}
-        notifies: []
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        startTime: 0
         loop: 0
       threshold: {x: 0, y: -1}
-    - sequence:
-        duration: 0
-        playbackSpeed: 0
+    - clipPlayer:
         animationClip: {fileID: -203655887218126122, guid: 38aef567ab842c741a041da67f0710bf, type: 3}
-        notifies: []
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        startTime: 0
         loop: 0
       threshold: {x: -1, y: 0}
-    - sequence:
-        duration: 0
-        playbackSpeed: 0
+    - clipPlayer:
         animationClip: {fileID: -203655887218126122, guid: dc51224a6e60ae44580be57dafeeeb10, type: 3}
-        notifies: []
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        startTime: 0
         loop: 0
       threshold: {x: 1, y: 0}
-    - sequence:
-        duration: 0
-        playbackSpeed: 0
+    - clipPlayer:
         animationClip: {fileID: -203655887218126122, guid: 33c7ed16845c6954eaf4a5bcee8b2504, type: 3}
-        notifies: []
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        startTime: 0
         loop: 0
       threshold: {x: 0, y: 0}
     horizontalMinMax:
@@ -95,8 +45,8 @@ MonoBehaviour:
     verticalMinMax:
       min: -1
       max: 1
+    localTimeScale: 1
   testX: 0
   testY: 1
-  references:
-    version: 2
-    RefIds: []
+  testTime: 0
+  testClipIndex: 2

@@ -19,6 +19,11 @@ namespace UAnimGraph.Runtime
 
         AnimationClipPlayable clipPlayable;
 
+        ~ClipPlayer()
+        {
+            clipPlayable.Destroy();
+        }
+
         public AnimationClip GetClip()
         {
             return animationClip;

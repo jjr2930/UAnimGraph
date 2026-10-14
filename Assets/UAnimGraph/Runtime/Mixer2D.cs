@@ -32,6 +32,15 @@ namespace UAnimGraph.Runtime
         AnimationMixerPlayable mixer;
         float[] weights;
 
+        ~Mixer2D()
+        {
+            inputs = new List<Mixer2DElement>();
+            horizontalMinMax = new MinMaxFloat(-1f, 1f);
+            verticalMinMax = new MinMaxFloat(-1f, 1f);
+
+            mixer.Destroy();
+        }
+
         public AnimationMixerPlayable BuildMixer2D(PlayableGraph playableGraph)
         {
             if (!playableGraph.IsValid())

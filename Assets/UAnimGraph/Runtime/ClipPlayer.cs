@@ -5,9 +5,8 @@ using UnityEngine.Playables;
 
 namespace UAnimGraph.Runtime
 {
-    //[CreateAssetMenu(fileName = "New Animation Sequence", menuName = "UAnimGraph/Animation Sequence", order = 1)]
     [Serializable]
-    public class ClipPlayer
+    public class ClipPlayer : PlayableElement
     {
         //[SerializeField] float duration;
         //[SerializeField] float playbackSpeed;
@@ -29,13 +28,12 @@ namespace UAnimGraph.Runtime
             return animationClip;
         }
 
-        public AnimationClipPlayable BuildClipPlayable(PlayableGraph playableGraph)
+        public override void BuildPlayable(PlayableGraph playableGraph)
         {
             clipPlayable = AnimationClipPlayable.Create(playableGraph, animationClip);
-            return clipPlayable;
         }
 
-        public void SetTime(float time)
+        public override void Evaluate(float time)
         {
             if (!clipPlayable.IsValid())
             {

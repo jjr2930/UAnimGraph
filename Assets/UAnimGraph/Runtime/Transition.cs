@@ -6,7 +6,7 @@ namespace UAnimGraph.Runtime
     [Serializable]
     public class Transition : Element
     {
-        [SerializeField] State fromState;
-        [SerializeField] State toState;
+        [SerializeField] string fromStateId;
+        [SerializeField] string toStateId;
     }
 }

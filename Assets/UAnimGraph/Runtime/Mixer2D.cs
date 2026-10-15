@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace UAnimGraph.Runtime
     /// TODO: Inherit from MixerBase
     /// </summary>
     [Serializable]
-    public class Mixer2D : Element
+    public class Mixer2D : PlayableElement
     {
         [Serializable]
         public class Mixer2DElement
@@ -229,5 +230,16 @@ namespace UAnimGraph.Runtime
                 inputs[i].ClipPlayer.SetTime(time * localTimeScale);
             }
         }
+
+        public override void BuildPlayable(PlayableGraph playableGraph)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Evaluate(float time)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+*/

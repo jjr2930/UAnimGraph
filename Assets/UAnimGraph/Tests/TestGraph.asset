@@ -12,41 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907fc0dcfa2eb5247a4f26ba2e898618, type: 3}
   m_Name: TestGraph
   m_EditorClassIdentifier: UAnimGraph.Runtime::UAnimGraph.Runtime.UAnimGraphAsset
-  mixer2D:
+  TestLayer:
     id: 
     displayName: 
     blackboard: {fileID: 0}
     owner: {fileID: 0}
     component: {fileID: 0}
-    inputs:
-    - clipPlayer:
-        animationClip: {fileID: -203655887218126122, guid: 7da771dd5bc0e484286430eb8647fdfa, type: 3}
-        loop: 0
-      threshold: {x: 0, y: 1}
-    - clipPlayer:
-        animationClip: {fileID: -203655887218126122, guid: 550af3a5822da5848be05b8ba90056b7, type: 3}
-        loop: 0
-      threshold: {x: 0, y: -1}
-    - clipPlayer:
-        animationClip: {fileID: -203655887218126122, guid: 38aef567ab842c741a041da67f0710bf, type: 3}
-        loop: 0
-      threshold: {x: -1, y: 0}
-    - clipPlayer:
-        animationClip: {fileID: -203655887218126122, guid: dc51224a6e60ae44580be57dafeeeb10, type: 3}
-        loop: 0
-      threshold: {x: 1, y: 0}
-    - clipPlayer:
-        animationClip: {fileID: -203655887218126122, guid: 33c7ed16845c6954eaf4a5bcee8b2504, type: 3}
-        loop: 0
-      threshold: {x: 0, y: 0}
-    horizontalMinMax:
-      min: -1
-      max: 1
-    verticalMinMax:
-      min: -1
-      max: 1
-    localTimeScale: 1
-  testX: 0
-  testY: 1
-  testTime: 0
-  testClipIndex: 2
+    localTimeScale: 0
+    stateMachine:
+      id: 
+      displayName: 
+      blackboard: {fileID: 0}
+      owner: {fileID: 0}
+      component: {fileID: 0}
+      localTimeScale: 0
+      state:
+        id: 
+        displayName: 
+        blackboard: {fileID: 0}
+        owner: {fileID: 0}
+        component: {fileID: 0}
+        localTimeScale: 0
+        playableElements: []
+  references:
+    version: 2
+    RefIds: []

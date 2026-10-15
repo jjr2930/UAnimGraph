@@ -1,14 +1,24 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
 
 namespace UAnimGraph.Runtime
 {
     [Serializable]
-    public class StateMachine : Element
+    public class StateMachine : PlayableElement
     {
-        [SerializeField] List<State> states = new List<State>();
-        [SerializeField] List<Transition> transitions = new List<Transition>();
-        [SerializeField] List<StateMachine> subStateMachines = new List<StateMachine>();
+        //[SerializeField] List<State> states;
+        //[SerializeField] List<Transition> transitions;
+        [SerializeField] State state;
+        public override void BuildPlayable(PlayableGraph playableGraph)
+        {
+            runtimePlayable = state.GetPlayable<AnimationMixerPlayable>();
+        }
+
+        public override void Evaluate(float time)
+        {
+            state.Evaluate(time);
+        }
     }
 }

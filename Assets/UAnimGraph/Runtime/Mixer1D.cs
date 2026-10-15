@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Assertions;
@@ -12,86 +11,55 @@ namespace UAnimGraph.Runtime
     /// in normalize space, 0~1, 0 is first sequence's threshold, 1 is last sequence's threshold
     /// </summary>
     [Serializable]
-    public class Mixer1D : Element
+    public class Mixer1D : MixerBase<float>
     {
-        [Serializable]
-        public class Mixer1DElement
+        [SerializeField] MinMaxFloat weightMinMax;
+        public override void BuildPlayable(PlayableGraph playableGraph)
         {
-            [SerializeField] ClipPlayer sequence;
-            [SerializeField] float threshold;
+            mixerPlayable = AnimationMixerPlayable.Create(playableGraph, inputs.Length);
 
-            public ClipPlayer Sequence => sequence;
-            public float Threshold => threshold;
-        }
-
-        [SerializeField] Mixer1DElement[] inputs;
-        [SerializeField] float min;
-        [SerializeField] float max;
-        [SerializeField] float weight;
-        [SerializeField] float localTimeScale = 1f;
-
-        AnimationClipPlayable[] clipPlayables;
-
-        AnimationMixerPlayable mixerPlayable;
-        List<int> leftRightIndexes;
-
-        public AnimationMixerPlayable BuildMixer1D(PlayableGraph graph)
-        {
-            mixerPlayable = AnimationMixerPlayable.Create(graph, inputs.Length);
-
-            clipPlayables = new AnimationClipPlayable[inputs.Length];
-            // Create two AnimationClipPlayable playables, then connect them to the mixer.
             for (int i = 0; i < inputs.Length; i++)
             {
-                clipPlayables[i] = inputs[i].Sequence.BuildClipPlayable(graph);
-                graph.Connect(clipPlayables[i], 0, mixerPlayable, i);
+                var playableElement = inputs[i].PlayableElement;
+                playableElement.BuildPlayable(playableGraph);
+                AnimationClipPlayable clipPlayable
+                    = playableElement.GetPlayable<AnimationClipPlayable>();
+                playableGraph.Connect(clipPlayable, 0, mixerPlayable, i);
             }
 
-            return mixerPlayable;
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                mixerPlayable.SetInputWeight(i, 0f);
+            }
         }
 
-
-        public void SetWeight(float value)
+        public override void Evaluate(float time)
         {
             Assert.IsTrue(mixerPlayable.IsValid(), "MixerPlayable is not valid.");
 
-            value = Mathf.Clamp(value, min, max);
+            float clampedTime = weightMinMax.Clamp(time);
 
             AnimationClipPlayable left;
             AnimationClipPlayable right;
 
-            leftRightIndexes.Clear();
-            for (int i = 0; i < inputs.Length - 1; i++)
-            {
-                if (inputs[i].Threshold <= value && value <= inputs[i + 1].Threshold)
-                {
-                    left = clipPlayables[i];
-                    right = clipPlayables[i + 1];
-                    float normalizedValue = Mathf.InverseLerp(inputs[i].Threshold, inputs[i + 1].Threshold, value);
-                    mixerPlayable.SetInputWeight(i, 1f - normalizedValue);
-                    mixerPlayable.SetInputWeight(i + 1, normalizedValue);
-
-                    leftRightIndexes = new List<int> { i, i + 1 };
-                    break;
-                }
-            }
 
             for (int i = 0; i < inputs.Length; i++)
             {
-                if (!leftRightIndexes.Contains(i))
-                {
-                    mixerPlayable.SetInputWeight(i, 0f);
-                }
+                mixerPlayable.SetInputWeight(i, 0f);
             }
-        }
 
-        public void EvaluateGraph(float time)
-        {
-            if (!mixerPlayable.IsValid())
-                return;
-            for (int i = 0; i < clipPlayables.Length; i++)
+            for (int i = 0; i < inputs.Length - 1; i++)
             {
-                clipPlayables[i].SetTime(time * localTimeScale);
+                if (inputs[i].Threshold <= clampedTime && clampedTime <= inputs[i + 1].Threshold)
+                {
+                    left = inputs[i].PlayableElement.GetPlayable<AnimationClipPlayable>();
+                    right = inputs[i + 1].PlayableElement.GetPlayable<AnimationClipPlayable>();
+
+                    float normalizedValue = Mathf.InverseLerp(inputs[i].Threshold, inputs[i + 1].Threshold, clampedTime);
+                    mixerPlayable.SetInputWeight(i, 1f - normalizedValue);
+                    mixerPlayable.SetInputWeight(i + 1, normalizedValue);
+                    break;
+                }
             }
         }
     }

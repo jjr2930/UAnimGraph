@@ -1,71 +1,47 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Animations;
-using UnityEngine.Playables;
 
 namespace UAnimGraph.Runtime
 {
-    public abstract class MixerBase<WeightThresholdType> : Element
+    [Serializable]
+    public abstract class MixerBase<WeightThresholdType> : PlayableElement
     {
         public class MixerElement
         {
-            [SerializeField] AnimationClip animationClip;
+            [SerializeField] PlayableElement playableElement;
             [SerializeField] WeightThresholdType threshold;
             [SerializeField] float localTimeScale;
 
-            public AnimationClip AnimationClip => animationClip;
-            public WeightThresholdType Threshold => threshold;
-
-            public MixerElement(AnimationClip animationClip, WeightThresholdType threshold)
-            {
-                this.animationClip = animationClip;
-                this.threshold = threshold;
-            }
-        }
-
-        [Serializable]
-        public class RuntimeMixerElement
-        {
-            [SerializeField] AnimationClipPlayable clipPlayable;
-            [SerializeField] WeightThresholdType threshold;
-            [SerializeField] float localTimeScale;
-
-            public AnimationClipPlayable ClipPlayable => clipPlayable;
+            public PlayableElement PlayableElement => playableElement;
             public WeightThresholdType Threshold => threshold;
             public float LocalTimeScale => localTimeScale;
-
-            public RuntimeMixerElement(AnimationClipPlayable clipPlayable, WeightThresholdType threshold)
+            public MixerElement(PlayableElement playableElement, WeightThresholdType threshold)
             {
-                this.clipPlayable = clipPlayable;
+                this.playableElement = playableElement;
                 this.threshold = threshold;
                 this.localTimeScale = 1.0f;
             }
         }
-        [SerializeField] protected float localTimeScale = 1.0f;
-        [SerializeField] protected RuntimeMixerElement[] runtimeInputs;
 
-        public abstract AnimationMixerPlayable BuildMixer(PlayableGraph playableGraph);
-        public abstract void SetWeight(WeightThresholdType weight);
+        [SerializeField] protected MixerElement[] inputs;
+
+        protected AnimationMixerPlayable mixerPlayable;
 
         public void SetTime(int portNumber, float time)
         {
-            if (runtimeInputs == null || portNumber < 0 || portNumber >= runtimeInputs.Length)
+            if (inputs == null || portNumber < 0 || portNumber >= inputs.Length)
                 throw new ArgumentOutOfRangeException(nameof(portNumber), "Invalid port number.");
 
-            AnimationClipPlayable clipPlayable = runtimeInputs[portNumber].ClipPlayable;
-            float clipLocalTimeScale = runtimeInputs[portNumber].LocalTimeScale;
-            if (!clipPlayable.IsValid())
-                throw new InvalidOperationException($"ClipPlayable at port {portNumber} is not valid.");
-
-            clipPlayable.SetTime(time * clipLocalTimeScale * localTimeScale);
+            inputs[portNumber].PlayableElement.Evaluate(time * localTimeScale);
         }
 
         public void SetAllTime(float time)
         {
-            if (runtimeInputs == null)
-                throw new InvalidOperationException("Runtime inputs are not initialized.");
+            if (inputs == null)
+                throw new InvalidOperationException("Inputs are not initialized.");
 
-            for (int i = 0; i < runtimeInputs.Length; i++)
+            for (int i = 0; i < inputs.Length; i++)
             {
                 SetTime(i, time);
             }

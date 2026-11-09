@@ -23,9 +23,8 @@ EditorSettings:
   m_EnableTextureStreamingInPlayMode: 1
   m_EnableEditorAsyncCPUTextureLoading: 0
   m_AsyncShaderCompilation: 1
-  m_BlockShaders: 0
-  m_UnlockBlockShaders: 0
   m_PrefabModeAllowAutoSave: 1
+  m_EnableMSBuildCompilationPipeline: 0
   m_EnterPlayModeOptionsEnabled: 1
   m_EnterPlayModeOptions: 1
   m_GameObjectNamingDigits: 1
@@ -36,7 +35,7 @@ EditorSettings:
   m_DisableCookiesInLightmapper: 0
   m_ShadowmaskStitching: 0
   m_AssetPipelineMode: 1
-  m_RefreshImportMode: 0
+  m_RefreshImportMode: 2
   m_CacheServerMode: 0
   m_CacheServerEndpoint: 
   m_CacheServerNamespacePrefix: default
@@ -51,3 +50,4 @@ EditorSettings:
   m_ForceAssetUnloadAndGCOnSceneLoad: 1
   m_HideBuildProfileClassicPlatforms: 1
   m_UseLegacyHierarchy: 0
+  m_EnableLegacyUmbraCulling: 1

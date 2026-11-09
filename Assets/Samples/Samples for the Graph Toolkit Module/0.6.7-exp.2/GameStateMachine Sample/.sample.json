@@ -1,0 +1,5 @@
+{
+  "displayName": "GameStateMachine Sample",
+  "description": "This sample describes how to use a state option to give each state of a state machine its own runtime behavior.",
+  "createSeparatePackage": false
+}

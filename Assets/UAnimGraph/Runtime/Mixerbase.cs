@@ -7,9 +7,10 @@ namespace UAnimGraph.Runtime
     [Serializable]
     public abstract class MixerBase<WeightThresholdType> : PlayableElement
     {
+        [Serializable]
         public class MixerElement
         {
-            [SerializeField] PlayableElement playableElement;
+            [SerializeReference] PlayableElement playableElement;
             [SerializeField] WeightThresholdType threshold;
             [SerializeField] float localTimeScale;
 

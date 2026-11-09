@@ -12,28 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907fc0dcfa2eb5247a4f26ba2e898618, type: 3}
   m_Name: TestGraph
   m_EditorClassIdentifier: UAnimGraph.Runtime::UAnimGraph.Runtime.UAnimGraphAsset
-  TestLayer:
-    id: 
-    displayName: 
-    blackboard: {fileID: 0}
-    owner: {fileID: 0}
-    component: {fileID: 0}
-    localTimeScale: 0
-    stateMachine:
-      id: 
-      displayName: 
-      blackboard: {fileID: 0}
-      owner: {fileID: 0}
-      component: {fileID: 0}
-      localTimeScale: 0
-      state:
-        id: 
-        displayName: 
-        blackboard: {fileID: 0}
-        owner: {fileID: 0}
-        component: {fileID: 0}
-        localTimeScale: 0
-        playableElements: []
+  elements: []
   references:
     version: 2
     RefIds: []

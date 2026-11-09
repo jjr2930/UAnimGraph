@@ -9,14 +9,18 @@ namespace UAnimGraph.Runtime
     [Serializable]
     public class State : PlayableElement
     {
-        [SerializeReference]
-        List<PlayableElement> playableElements;
+        [SerializeField] List<string> elementIds;
+        [SerializeField] string TypeName = typeof(State).FullName;
+
+        List<Mixer1D> mixer1ds;
+
+        List<ClipPlayer> clipPlayers;
 
         string rootElementId;
 
         public override void BuildPlayable(PlayableGraph playableGraph)
         {
-            foreach (PlayableElement element in playableElements)
+            foreach (PlayableElement element in mixer1ds)
             {
                 element.BuildPlayable(playableGraph);
             }
@@ -26,7 +30,7 @@ namespace UAnimGraph.Runtime
 
         public override void Evaluate(float time)
         {
-            foreach (PlayableElement element in playableElements)
+            foreach (PlayableElement element in mixer1ds)
             {
                 element.Evaluate(time);
             }
@@ -34,7 +38,7 @@ namespace UAnimGraph.Runtime
 
         PlayableElement GetRootElement()
         {
-            foreach (PlayableElement element in playableElements)
+            foreach (PlayableElement element in mixer1ds)
             {
                 if (element.Id == rootElementId)
                 {
@@ -44,6 +48,21 @@ namespace UAnimGraph.Runtime
             throw new InvalidOperationException($"Root element with ID {rootElementId} not found.");
         }
 
+        public void AddMixer1D()
+        {
+            Mixer1D mixer1D = new Mixer1D();
+            mixer1ds.Add(mixer1D);
+        }
 
+        public void AddClipPlayer()
+        {
+            ClipPlayer clipPlayer = new ClipPlayer();
+            clipPlayers.Add(clipPlayer);
+        }
+
+        public override void OnPostDeserialization(UAnimGraphAsset asset)
+        {
+            base.OnPostDeserialization(asset);
+        }
     }
 }

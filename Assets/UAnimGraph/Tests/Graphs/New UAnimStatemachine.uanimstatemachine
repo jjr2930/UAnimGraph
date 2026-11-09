@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12501, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEditor.dll::Unity.GraphToolkit.Editor.Implementation.GraphObjectImp
+  m_GraphModel:
+    rid: 1883087574920069198
+  references:
+    version: 2
+    RefIds:
+    - rid: 1883087574920069198
+      type: {class: StateMachineImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 11590043584406394571
+          m_Value1: 8193366141350525933
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: cb96d6bb3b1bd8a0ed3be96118afb471
+        m_Name: 
+        m_GraphNodeModels: []
+        m_GraphWireModels: []
+        m_GraphStickyNoteModels: []
+        m_GraphPlacematModels: []
+        m_GraphVariableModels: []
+        m_GraphPortalModels: []
+        m_SectionModels:
+        - rid: 1883087574920069199
+        m_LocalSubgraphs: []
+        m_LastKnownBounds:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_GraphElementMetaData: []
+        m_Graph:
+          rid: 1883087574920069200
+    - rid: 1883087574920069199
+      type: {class: SectionModel, ns: Unity.GraphToolkit.Editor, asm: UnityEditor.GraphToolkitModule}
+      data:
+        m_Guid:
+          m_Value0: 11840978028583171826
+          m_Value1: 15845395308547186270
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: f2b6e7e2c79a53a45e9e98a31427e6db
+        m_Version: 2
+        m_Items: []
+        m_Title: 
+    - rid: 1883087574920069200
+      type: {class: UAnimStatemachine, ns: UAnimGraph.Editor, asm: UAnimGraph.Editor}
+      data: 

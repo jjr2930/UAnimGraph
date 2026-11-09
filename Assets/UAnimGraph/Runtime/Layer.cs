@@ -8,7 +8,16 @@ namespace UAnimGraph.Runtime
     [Serializable]
     public class Layer : PlayableElement
     {
-        [SerializeField] StateMachine stateMachine;
+        [SerializeField] string StateMachineId;
+        [SerializeField] string TypeName = typeof(Layer).FullName;
+        StateMachine stateMachine;
+
+        public override void OnPostDeserialization(UAnimGraphAsset asset)
+        {
+            base.OnPostDeserialization(asset);
+
+            stateMachine = asset.GetElementById<StateMachine>(StateMachineId);
+        }
 
         public override void BuildPlayable(PlayableGraph playableGraph)
         {

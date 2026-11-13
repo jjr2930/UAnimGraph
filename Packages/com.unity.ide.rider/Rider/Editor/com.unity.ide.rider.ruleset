@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Rider editor session state" Description="Rider integration caches, callbacks and sessions intentionally persist across Play Mode. Scope is Unity.Rider.Editor only." ToolsVersion="12.0">
+  <Rules AnalyzerId="Unity.Scripting.LifecycleManagement" RuleNamespace="Unity.Scripting.LifecycleManagement">
+    <Rule Id="UAL0010" Action="None" />
+    <Rule Id="UAL0013" Action="None" />
+  </Rules>
+</RuleSet>

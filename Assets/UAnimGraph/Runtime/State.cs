@@ -1,68 +1,59 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Playables;
 
-namespace UAnimGraph.Runtime
+namespace UAnimGraph
 {
-    [Serializable]
-    public class State : PlayableElement
+    // Value snapshot: retaining a context never changes its recorded State times.
+    public readonly struct State
     {
-        [SerializeField] List<string> elementIds;
-        [SerializeField] string TypeName = typeof(State).FullName;
-
-        List<Mixer1D> mixer1ds;
-
-        List<ClipPlayer> clipPlayers;
-
-        string rootElementId;
-
-        public override void BuildPlayable(PlayableGraph playableGraph)
+        public readonly UAnimState Definition;
+        public readonly double Time;
+        internal State(UAnimState definition, double time)
         {
-            foreach (PlayableElement element in mixer1ds)
-            {
-                element.BuildPlayable(playableGraph);
-            }
-
-            runtimePlayable = GetRootElement().GetPlayable<AnimationMixerPlayable>();
+            Definition = definition;
+            Time = time;
         }
 
-        public override void Evaluate(float time)
+        public string Id
         {
-            foreach (PlayableElement element in mixer1ds)
+            get
             {
-                element.Evaluate(time);
+                return Definition?.id;
             }
         }
 
-        PlayableElement GetRootElement()
+        public string Name
         {
-            foreach (PlayableElement element in mixer1ds)
+            get
             {
-                if (element.Id == rootElementId)
+                return Definition?.name;
+            }
+        }
+
+        public double TotalNormalizedTime
+        {
+            get
+            {
+                return Definition != null && Definition.duration > 0 ? Time / Definition.duration : 0;
+            }
+        }
+
+        public float NormalizedTime
+        {
+            get
+            {
+                if(Definition?.graph != null)
                 {
-                    return element;
+                    foreach(var node in Definition.graph.nodes)
+                    {
+                        if(node.kind == UAnimPoseKind.Clip && node.loop)
+                        {
+                            return (float)(TotalNormalizedTime - Math.Floor(TotalNormalizedTime));
+                        }
+                    }
                 }
+                return Mathf.Clamp01((float)TotalNormalizedTime);
             }
-            throw new InvalidOperationException($"Root element with ID {rootElementId} not found.");
-        }
-
-        public void AddMixer1D()
-        {
-            Mixer1D mixer1D = new Mixer1D();
-            mixer1ds.Add(mixer1D);
-        }
-
-        public void AddClipPlayer()
-        {
-            ClipPlayer clipPlayer = new ClipPlayer();
-            clipPlayers.Add(clipPlayer);
-        }
-
-        public override void OnPostDeserialization(UAnimGraphAsset asset)
-        {
-            base.OnPostDeserialization(asset);
         }
     }
 }

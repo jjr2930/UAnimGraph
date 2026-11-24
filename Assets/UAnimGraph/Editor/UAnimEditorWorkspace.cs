@@ -29,24 +29,20 @@ namespace UAnimGraph.Authoring
         public static UAnimAsset CurrentRoot
         {
             get;
-            private set;
+            internal set;
         }
 
         [MenuItem("Window/UAnimGraph/Authoring Workspace")]
         public static void ShowWorkspace()
         {
-            GetWindow<UAnimEditorWorkspace>("UAnimGraph Workspace").Show();
+            UAnimGraphEditor.ShowEditor();
         }
 
         public static void Open(UAnimAsset root)
         {
-            var w = GetWindow<UAnimEditorWorkspace>("UAnimGraph Workspace");
-            w.root = root;
             CurrentRoot = root;
-            w.Navigate(root);
-            w.Show();
+            UAnimGraphEditor.Open(root);
         }
-
         void OnEnable()
         {
             EditorApplication.update += UpdateHighlight;
@@ -401,6 +397,21 @@ namespace UAnimGraph.Authoring
             openButton.style.marginBottom = 2;
             body.Add(openButton);
             View.Root.Add(body);
+            // Toolkit can hide/detach custom children while refreshing or culling
+            // an existing State. Restore the same controls instead of constructing
+            // another field/button or changing the State and its connections.
+            void RestoreControls()
+            {
+                if(body.parent != View.Root)
+                {
+                    View.Root.Add(body);
+                }
+                body.style.display = DisplayStyle.Flex;
+                body.style.visibility = Visibility.Visible;
+                body.style.opacity = 1;
+            }
+            View.Root.RegisterCallback<GeometryChangedEvent>(_ => RestoreControls());
+            View.Root.schedule.Execute(RestoreControls).Every(200);
             // Capture before GTK's selection/drag handlers consume body clicks.
             View.Root.RegisterCallback<MouseDownEvent>(e =>
             {

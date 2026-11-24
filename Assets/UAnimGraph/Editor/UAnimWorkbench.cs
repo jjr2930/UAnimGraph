@@ -375,6 +375,31 @@ namespace UAnimGraph.Authoring
             }
         }
 
+        internal Action repaintRequested;
+        internal bool visualizeToolkit = true;
+        internal UAnimInstance CurrentInstance
+        {
+            get
+            {
+                return debugTarget ? debugTarget.Instance : instance;
+            }
+        }
+        bool lockRoot;
+        internal GameObject PreviewModel
+        {
+            get
+            {
+                return targetObject;
+            }
+            set
+            {
+                if(targetObject != value)
+                {
+                    Stop();
+                    targetObject = value;
+                }
+            }
+        }
         UAnimAsset asset;
         GameObject targetObject, clone;
         float previewTime, previewLength = 10;
@@ -455,7 +480,7 @@ namespace UAnimGraph.Authoring
             if(live != visualizedInstance)
             {
                 debugView?.Dispose();
-                debugView = live != null ? new UAnimGraphDebugView() : null;
+                debugView = live != null && visualizeToolkit ? new UAnimGraphDebugView() : null;
                 visualizedInstance = live;
             }
 
@@ -468,6 +493,7 @@ namespace UAnimGraph.Authoring
             if(instance != null || debugTarget)
             {
                 Repaint();
+                repaintRequested?.Invoke();
             }
         }
 
@@ -527,8 +553,17 @@ namespace UAnimGraph.Authoring
                 preview.AddSingleGO(clone);
                 DestroyImmediate(staging);
                 var animator = clone.GetComponentInChildren<Animator>();
+                if(!animator)
+                {
+                    throw new InvalidOperationException("Preview Model must contain an Animator.");
+                }
+                clone.SetActive(true);
+                animator.enabled = true;
+                animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                 animator.applyRootMotion = false;
                 animator.runtimeAnimatorController = null;
+                animator.Rebind();
+                animator.Update(0);
                 instance = new UAnimInstance(asset, animator, true);
                 playing = true;
                 lastTime = EditorApplication.timeSinceStartup;
@@ -620,21 +655,37 @@ namespace UAnimGraph.Authoring
             }
         }
 
-        public void DrawEmbedded()
+        public void DrawEmbedded(bool lockRoot = false)
         {
-            OnGUI();
+            this.lockRoot = lockRoot;
+            try
+            {
+                OnGUI();
+            }
+            finally
+            {
+                this.lockRoot = false;
+            }
         }
 
         void OnGUI()
         {
             EditorGUI.BeginChangeCheck();
-            asset = (UAnimAsset)EditorGUILayout.ObjectField("Root Asset", asset, typeof(UAnimAsset), false);
+            using(new EditorGUI.DisabledScope(lockRoot))
+            {
+                asset = (UAnimAsset)EditorGUILayout.ObjectField("Root Asset", asset, typeof(UAnimAsset), false);
+            }
             if(EditorGUI.EndChangeCheck())
             {
                 Stop();
             }
 
+            EditorGUI.BeginChangeCheck();
             targetObject = (GameObject)EditorGUILayout.ObjectField("Preview Model", targetObject, typeof(GameObject), true);
+            if(EditorGUI.EndChangeCheck())
+            {
+                Stop();
+            }
             using(new EditorGUILayout.HorizontalScope())
             {
                 if(GUILayout.Button("Start Preview"))

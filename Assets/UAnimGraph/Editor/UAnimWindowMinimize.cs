@@ -46,6 +46,11 @@ namespace UAnimGraph.Authoring
             var titles = new HashSet<string>();
             foreach(var window in Resources.FindObjectsOfTypeAll<EditorWindow>())
             {
+                if(window is UAnimGraphEditor)
+                {
+                    titles.Add(window.titleContent.text);
+                    continue;
+                }
                 if(window is not IGraphWindow graph)
                 {
                     continue;

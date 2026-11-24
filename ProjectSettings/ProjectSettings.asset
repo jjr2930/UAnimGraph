@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   m_BuildProfilePlayerSettings: {fileID: 0}
-  serializedVersion: 32
+  serializedVersion: 33
   productGUID: a678d77e2b38564438349ae63f370a40
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -750,8 +750,8 @@ PlayerSettings:
   switchCaStoreFilePath: 
   switchStorageMode: 0
   switchStorageMounts: []
-  switchPersistentDataPathMountName:
-  switchTemporaryCachePathMountName:
+  switchPersistentDataPathMountName: 
+  switchTemporaryCachePathMountName: 
   ps4NPAgeRating: 12
   ps4NPTitleSecret: 
   ps4NPTrophyPackPath: 
@@ -966,7 +966,7 @@ PlayerSettings:
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: UAnimGraph_
-  organizationId: joojungyeol
+  organizationId: 
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -112,6 +112,20 @@ namespace UAnimGraph.Authoring
                 return;
             }
 
+            if(frames == 20)
+            {
+                var graphWindow = Resources.FindObjectsOfTypeAll<EditorWindow>().First(w => w is IGraphWindow g && g.StateMachine?.ID == machine.ID);
+                var existing = graphWindow.rootVisualElement.Query<VisualElement>("uanim-pose-state-controls").ToList();
+                Check(existing.Count == 3, "all State controls exist before the refresh regression");
+                existing[1].style.display = DisplayStyle.None;
+                existing[2].style.display = DisplayStyle.None;
+                existing[2].RemoveFromHierarchy();
+                return;
+            }
+            if(frames < 60)
+            {
+                return;
+            }
             EditorApplication.update -= VerifyUi;
             try
             {
@@ -120,6 +134,8 @@ namespace UAnimGraph.Authoring
                 Check(bodies.Count == 3, "all native Pose State views construct their controls");
                 foreach(var body in bodies)
                 {
+                    Check(body.resolvedStyle.display != DisplayStyle.None && body.resolvedStyle.visibility == Visibility.Visible, "State body is visible again after refresh");
+                    Check(body.Query<TextField>().ToList().Count == 1, "State has exactly one Name field");
                     var buttons = body.Query<Button>().ToList();
                     Check(buttons.Count == 1 && buttons[0].text == "Open State Pose Graph", "native State has only the Open State Pose Graph button");
                 }

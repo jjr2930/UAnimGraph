@@ -305,6 +305,9 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 1
+  transparencyMode:
+    m_OverrideState: 1
+    m_Value: 0
   lightTransportMultiBounce:
     m_OverrideState: 1
     m_Value: 1
@@ -325,6 +328,9 @@ MonoBehaviour:
   lightTransportWarmupSampleMultiplier:
     m_OverrideState: 1
     m_Value: 2
+  lightTransportPunctualLightCandidateCount:
+    m_OverrideState: 1
+    m_Value: 4
   patchFilteringTemporalSmoothing:
     m_OverrideState: 1
     m_Value: 0.8
@@ -361,6 +367,25 @@ MonoBehaviour:
   volumePatchWarpingEnabled:
     m_OverrideState: 1
     m_Value: 1
+  entityCullingSphereMode:
+    m_OverrideState: 1
+    m_Value: 0
+  entityCullingDistanceMargin:
+    m_OverrideState: 1
+    m_Value: 100
+  entityCullingDistance:
+    m_OverrideState: 1
+    m_Value: 150
+  entityCullingSmallObjectUnit:
+    m_OverrideState: 1
+    m_Value: 0
+  entityCullingMinScreenSize:
+    m_OverrideState: 1
+    m_Value: 16
+  entityCullingMinSolidAngle:
+    m_OverrideState: 1
+    m_Value: 1
+  m_SerializedVersion: 1
 --- !u!114 &-4463884970436517307
 MonoBehaviour:
   m_ObjectHideFlags: 3
